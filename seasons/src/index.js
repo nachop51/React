@@ -1,6 +1,8 @@
 //jshint esversion:6
+import "semantic-ui-css/semantic.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import SeasonDisplay from "./SeasonDisplay";
 
 const element = document.getElementById("root");
 const root = ReactDOM.createRoot(element);
@@ -16,13 +18,18 @@ const root = ReactDOM.createRoot(element);
 
 // Class-based Component example
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  // If we want to call a constructor method we need to call super(props) (props is an object that contains all the data that was passed to this component)
+  // constructor(props) {
+  //   super(props);
 
-    // We never want to set state like this
-    // the only exception is when we are initializing state
-    this.state = { lat: null, errorMessage: "" };
-  }
+  //   // We never want to set state like this
+  //   // the only exception is when we are initializing state
+
+  //   // This are two valid ways to initialize state
+  //   this.state = { lat: null, errorMessage: "" };
+  // }
+
+  state = { lat: null, errorMessage: "" };
 
   // componentDidMount is invoked immediately after a component is mounted (inserted into the tree).
   // Initialization that requires DOM nodes should go here.
@@ -58,7 +65,7 @@ class App extends React.Component {
     }
 
     if (!this.state.errorMessage && this.state.lat) {
-      return <div>Latitude: {this.state.lat}</div>;
+      return <SeasonDisplay lat={this.state.lat} />;
     }
 
     return <div>Loading!</div>;
