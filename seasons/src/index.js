@@ -21,21 +21,47 @@ class App extends React.Component {
 
     // We never want to set state like this
     // the only exception is when we are initializing state
-    this.state = { lat: null };
+    this.state = { lat: null, errorMessage: "" };
+  }
 
+  // componentDidMount is invoked immediately after a component is mounted (inserted into the tree).
+  // Initialization that requires DOM nodes should go here.
+  // If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         // This is the right way set the state of an object
         // We call setState to update the state object
         this.setState({ lat: position.coords.latitude });
       },
-      (err) => console.error(err)
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
     );
+  }
+
+  // componentDidUpdate() is invoked immediately after updating occurs. This method is not called for the initial render.
+  componentDidUpdate() {
+    console.log("My component was just updated - it rerendered!");
   }
 
   // React says we have to define render!!
   render() {
-    return <div>Latitude: {this.state.lat}</div>;
+    // Conditional Rendering
+    // If...
+    //  the user allows location access, show the latitude
+    //  the user denies location access, show the error message
+    //  the user has not yet responded, show a loading message
+
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <div>Latitude: {this.state.lat}</div>;
+    }
+
+    return <div>Loading!</div>;
   }
 }
 
