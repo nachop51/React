@@ -1,9 +1,9 @@
 //jshint esversion:6
+import "./style/App.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import CommentDetail from "./CommentDetail";
 import ApprovalCard from "./ApprovalCard";
-import "./style/App.css";
 import { faker } from "@faker-js/faker";
 
 const element = document.getElementById("root");
