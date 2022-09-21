@@ -1,8 +1,10 @@
 //jshint esversion:6
+import "./style/App.css";
 import "semantic-ui-css/semantic.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import SeasonDisplay from "./SeasonDisplay";
+import Spinner from "./Spinner";
 
 const element = document.getElementById("root");
 const root = ReactDOM.createRoot(element);
@@ -52,8 +54,8 @@ class App extends React.Component {
     console.log("My component was just updated - it rerendered!");
   }
 
-  // React says we have to define render!!
-  render() {
+  // Helper function to render the content of the page
+  renderContent() {
     // Conditional Rendering
     // If...
     //  the user allows location access, show the latitude
@@ -68,7 +70,17 @@ class App extends React.Component {
       return <SeasonDisplay lat={this.state.lat} />;
     }
 
-    return <div>Loading!</div>;
+    return <Spinner message="Please accept the location request..." />;
+  }
+
+  // In general we don't want to have multiple returns in the
+  // render method, so we can create a helper function to
+  // render the content of the page, and wrap it with
+  // something that will be rendered in all cases
+
+  // React says we have to define render!!
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
   }
 }
 
