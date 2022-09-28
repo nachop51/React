@@ -1,7 +1,7 @@
 import React from "react";
 // import Accordion from "./Accordion";
-// import Search from "./Search";
-import Dropdown from "./Dropdown";
+import Search from "./Search";
+// import Dropdown from "./Dropdown";
 
 // const items = [
 //   {
@@ -18,27 +18,33 @@ import Dropdown from "./Dropdown";
 //   },
 // ];
 
-const options = [
-  {
-    label: "The Color Red",
-    value: "red",
-  },
-  {
-    label: "The Color Green",
-    value: "green",
-  },
-  {
-    label: "A Shade of Blue",
-    value: "blue",
-  },
-];
+// const options = [
+//   {
+//     label: "The Color Red",
+//     value: "red",
+//   },
+//   {
+//     label: "The Color Green",
+//     value: "green",
+//   },
+//   {
+//     label: "A Shade of Blue",
+//     value: "blue",
+//   },
+// ];
 
 const App = () => {
+  // const [selected, setSelected] = useState(options[0]);
+
   return (
     <React.Fragment>
-      {/* <Accordion items={items} />
-       <Search /> */}
-      <Dropdown options={options} />
+      {/* <Accordion items={items} /> */}
+      <Search />
+      {/* <Dropdown
+        selected={selected}
+        onSelectedChange={setSelected}
+        options={options}
+      /> */}
     </React.Fragment>
   );
 };
