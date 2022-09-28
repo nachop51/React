@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 // import Accordion from "./Accordion";
-import Search from "./Search";
-// import Dropdown from "./Dropdown";
+// import Search from "./Search";
+import Dropdown from "./Dropdown";
 
 // const items = [
 //   {
@@ -18,33 +18,39 @@ import Search from "./Search";
 //   },
 // ];
 
-// const options = [
-//   {
-//     label: "The Color Red",
-//     value: "red",
-//   },
-//   {
-//     label: "The Color Green",
-//     value: "green",
-//   },
-//   {
-//     label: "A Shade of Blue",
-//     value: "blue",
-//   },
-// ];
+const options = [
+  {
+    label: "The Color Red",
+    value: "red",
+  },
+  {
+    label: "The Color Green",
+    value: "green",
+  },
+  {
+    label: "A Shade of Blue",
+    value: "blue",
+  },
+];
 
 const App = () => {
-  // const [selected, setSelected] = useState(options[0]);
+  const [selected, setSelected] = useState(options[0]);
+  const [showDropdown, setShowDropdown] = useState(true);
 
   return (
     <React.Fragment>
+      <button onClick={() => setShowDropdown(!showDropdown)}>
+        Toggle Dropdown
+      </button>
       {/* <Accordion items={items} /> */}
-      <Search />
-      {/* <Dropdown
-        selected={selected}
-        onSelectedChange={setSelected}
-        options={options}
-      /> */}
+      {/* <Search /> */}
+      {showDropdown ? (
+        <Dropdown
+          selected={selected}
+          onSelectedChange={setSelected}
+          options={options}
+        />
+      ) : null}
     </React.Fragment>
   );
 };
