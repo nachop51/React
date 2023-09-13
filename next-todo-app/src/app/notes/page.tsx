@@ -1,4 +1,5 @@
 import Link from "next/link"
+import CreateNote from "./CreateNote"
 
 export const dynamic = "auto",
   dynamicParams = true,
@@ -34,6 +35,7 @@ export default async function NotesPage() {
           return <Note key={note.id} note={note} />
         })}
       </div>
+      <CreateNote />
     </div>
   )
 }

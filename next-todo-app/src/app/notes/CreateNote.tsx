@@ -29,7 +29,7 @@ export default function CreateNote() {
   }
 
   return (
-    <form onSubmit={create}>
+    <form onSubmit={create} className="flex flex-col gap-4 text-black max-w-lg">
       <input type="text"
         placeholder="Title"
         value={title}
@@ -40,7 +40,7 @@ export default function CreateNote() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <button type="submit">Create note</button>
+      <button type="submit" className="text-white border border-solid border-white">Create note</button>
     </form>
   )
 }
