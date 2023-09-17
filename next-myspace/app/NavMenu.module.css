@@ -1,0 +1,12 @@
+.nav {
+  @apply flex h-20 justify-between items-center;
+  background-color: #1d4ed8;
+}
+
+.links {
+  @apply list-none flex mr-4;
+}
+
+.links li {
+  @apply h-20 flex items-center p-1;
+}
