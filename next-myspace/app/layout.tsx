@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import NavMenu from './NavMenu'
+import AuthProvider from './AuthProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,11 +14,13 @@ interface IProps {
 
 export default function RootLayout({ children }: IProps) {
   return (
-    <html lang="en">
-      <body>
-        <NavMenu />
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body>
+          <NavMenu />
+          {children}
+        </body>
+      </html>
+    </AuthProvider>
   )
 }
