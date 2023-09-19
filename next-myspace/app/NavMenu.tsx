@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { SignInButton } from './components/buttons'
 
 export default function NavMenu() {
   return (
@@ -16,6 +17,9 @@ export default function NavMenu() {
         </li>
         <li className="h-20 flex items-center p-1 text-white font-bold">
           <Link href="/users">Users</Link>
+        </li>
+        <li className="h-20 flex items-center p-1 text-white font-bold">
+          <SignInButton />
         </li>
       </ul>
     </nav>
