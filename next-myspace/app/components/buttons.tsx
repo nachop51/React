@@ -11,14 +11,17 @@ export function SignInButton() {
 
   if (status === 'authenticated')
     return (
-      <Link href={'/dashboard'}>
-        <Image
-          src={session.user?.image ?? '/mememan.webp'}
-          width={32}
-          height={32}
-          alt={session.user?.name ?? 'Your name'}
-        />
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link href={'/dashboard'}>
+          <Image
+            src={session.user?.image ?? '/mememan.webp'}
+            width={32}
+            height={32}
+            alt={session.user?.name ?? 'Your name'}
+          />
+        </Link>
+        <SignOutButton />
+      </div>
     )
 
   return <button onClick={() => signIn()}>Sign in</button>
