@@ -1,12 +1,21 @@
+import { useState } from 'react'
 import './TwitterFollowCard.css'
 
 type Props = {
   username: string
+  formatUsername: (username: string) => string
   name: string
-  isFollowing: boolean
+  initialIsFollowing: boolean
 }
 
-const TwitterFollowCard = ({ username, name, isFollowing }: Props) => {
+const TwitterFollowCard = ({
+  formatUsername,
+  username,
+  name,
+  initialIsFollowing,
+}: Props) => {
+  const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
+
   return (
     <article className="tw-followCard">
       <header className="tw-followCard-header">
@@ -17,11 +26,19 @@ const TwitterFollowCard = ({ username, name, isFollowing }: Props) => {
         />
         <div className="tw-followCard-info">
           <strong>{name}</strong>
-          <span className="tw-followCard-infoUsername">@{username}</span>
+          <span className="tw-followCard-infoUsername">
+            {formatUsername(username)}
+          </span>
         </div>
       </header>
       <aside>
-        <button className="tw-followCard-button">
+        <button
+          className={
+            'tw-followCard-button' +
+            (isFollowing ? ' tw-followCard-button--following' : '')
+          }
+          onClick={() => setIsFollowing((prev) => !prev)}
+        >
           {isFollowing ? 'Following' : 'Follow'}
         </button>
       </aside>
