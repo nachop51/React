@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const FollowMouse = () => {
+const FollowMouse = (): JSX.Element => {
   const [enabled, setEnabled] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 

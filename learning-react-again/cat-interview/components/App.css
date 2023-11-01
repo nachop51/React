@@ -1,0 +1,14 @@
+:root {
+  color-scheme: dark;
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
