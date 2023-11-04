@@ -28,7 +28,7 @@ export const searchMovies = async ({ search }): Promise<Movie[]> => {
     const data = await response.json()
 
     const movies: MovieResponse[] = data.Search
-    console.log(movies)
+    // console.log(movies)
 
     return movies.map((movie) => ({
       id: movie.imdbID,

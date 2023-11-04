@@ -1,19 +1,35 @@
-import React, { /* useRef, */ } from 'react'
+import React, { useCallback, useEffect, useState /* useRef, */ } from 'react'
 import './App.css'
 import useMovies from './hooks/useMovies'
 import { Movies } from './components/Movies'
 import useSearch from './hooks/useSearch'
+import debounce from 'just-debounce-it'
 
 function App (): JSX.Element {
-  // const inputRef = useRef<HTMLInputElement>(null)
+  const [sort, setSort] = useState(false)
   const { search, setSearch, error } = useSearch()
-  const { movies, loading, getMovies } = useMovies({ search })
-
+  const { movies, loading, getMovies } = useMovies({ search, sort })
+  // const inputRef = useRef<HTMLInputElement>(null)
   // ^ useRef is used to get a constant reference to a mutable value
   // code: const ref = useRef(0)
   // code: ref.current = ref.current + 1
   // code: console.log(ref.current)
   // ^ Every time we change the value of the ref, the component will not re-render
+
+  // * The thing with this implementation is that the function will be re-created every time the component re-renders
+  // * so each time it will create a differente debounced function
+  // * all will get executed
+  // const debouncedGetMovies = debounce(({ search }) => {
+  //   console.log('debounced')
+  //   getMovies({ search })
+  // }, 500)
+
+  const debouncedGetMovies = useCallback(
+    debounce(({ search }) => {
+      getMovies({ search })
+    }, 300),
+    [getMovies]
+  )
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -32,16 +48,30 @@ function App (): JSX.Element {
     // * This may be good for javascript, but this is not the best way to do it in React
     // & This is called 'uncontrolled components'
     // & Since we are not using the state to store the value of the input
-    console.log(search)
-    getMovies()
+    // console.log(search)
+    getMovies({ search })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     // & target vs currentTarget
     // * target is the element that triggered the event
     // * currentTarget is the element that the event listener is attached to
-    setSearch(e.currentTarget.value)
+    // const newSearch = e.target.value
+    const newSearch = e.currentTarget.value
+
+    setSearch(newSearch)
+
+    // getMovies({ search: newSearch })
+    debouncedGetMovies({ search: newSearch })
   }
+
+  const handleSort = (): void => {
+    setSort(!sort)
+  }
+
+  // useEffect(() => {
+  //   console.log('new getMovies created')
+  // }, [getMovies])
 
   return (
     <div className='page'>
@@ -58,6 +88,7 @@ function App (): JSX.Element {
             name='query'
             placeholder='Raiders of the Lost Ark' /* ref={inputRef} */
           />
+          <input type='checkbox' onChange={handleSort} checked={sort} />
           <button>Search</button>
         </form>
         {
