@@ -10,11 +10,11 @@ interface Movie {
 const ListOfMovies = ({ movies }: { movies: Movie[] }): JSX.Element => {
   return (
     <ul className='movies'>
-      {movies.map((movie) => (
-        <li className='movie' key={movie.id}>
-          <h3>{movie.title}</h3>
-          <p>{movie.year}</p>
-          <img src={movie.poster} alt={movie.title} />
+      {movies.map(({ id, title, year, poster }) => (
+        <li className='movie' key={id}>
+          <h3>{title}</h3>
+          <p>{year}</p>
+          <img src={poster} alt={title} />
         </li>
       ))}
     </ul>
@@ -28,5 +28,13 @@ const NoResults = (): JSX.Element => {
 export const Movies = ({ movies }: { movies: Movie[] }): JSX.Element => {
   const hasResults = movies?.length > 0
 
-  return <>{hasResults ? <ListOfMovies movies={movies} /> : <NoResults />}</>
+  return (
+    <>
+      {
+        hasResults
+          ? <ListOfMovies movies={movies} />
+          : <NoResults />
+      }
+    </>
+  )
 }
