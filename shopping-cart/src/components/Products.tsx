@@ -1,21 +1,10 @@
 import './Products.css'
 import React from 'react'
 import { AddToCartIcon } from './Icons'
+import { type IProducts } from '../common/interfaces'
 
 interface Props {
-  products: Array<{
-    id: number
-    title: string
-    description: string
-    price: number
-    discountPercentage: number
-    rating: number
-    stock: number
-    brand: string
-    category: string
-    thumbnail: string
-    images: string[]
-  }>
+  products: IProducts[]
 }
 
 const Products = ({ products }: Props): JSX.Element => {

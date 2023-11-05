@@ -1,7 +1,9 @@
+import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
+
+import { FiltersProvider } from './context/filters.tsx'
 
 const root = document.getElementById('root')
 
@@ -11,6 +13,8 @@ if (root === null) {
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <App />
+    <FiltersProvider>
+      <App />
+    </FiltersProvider>
   </React.StrictMode>
 )
