@@ -1,17 +1,8 @@
 import { useContext } from 'react'
-import { type IProducts } from '../common/interfaces'
+import { type IFilters, type IProducts } from '../common/interfaces'
 import { FiltersContext } from '../context/filters'
 
-interface returnValue {
-  filters: {
-    category: string
-    minPrice: number
-  }
-  filterProducts: (products: IProducts[]) => IProducts[]
-  setFilters: (filters: { category: string, minPrice: number }) => void
-}
-
-const useFilters = (): returnValue => {
+const useFilters = (): IFilters => {
   const { filters, setFilters } = useContext(FiltersContext)
 
   // console.log(filters)
