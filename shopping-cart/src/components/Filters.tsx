@@ -1,6 +1,6 @@
 import useFilters from '../hooks/useFilters'
 import './Filters.css'
-import React, { useId } from 'react'
+import { useId } from 'react'
 
 const Filters = (): JSX.Element => {
   const { filters, setFilters } = useFilters()
@@ -11,7 +11,7 @@ const Filters = (): JSX.Element => {
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFilters(prevState => ({
       ...prevState,
-      minPrice: e.target.value
+      minPrice: e.target.value as unknown as number
     }))
   }
 

@@ -1,15 +1,10 @@
 import React, { createContext, useState } from 'react'
+import { type IFilters } from '../common/interfaces'
 
-export const FiltersContext = createContext({
-  filters: {
-    category: 'all',
-    minPrice: 0
-  },
-  setFilters: (filters: { category: string, minPrice: number }) => { }
-})
+export const FiltersContext = createContext<IFilters | null>(null)
 
 export const FiltersProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<{ category: string, minPrice: number }>({
     category: 'all',
     minPrice: 0
   })

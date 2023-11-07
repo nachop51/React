@@ -9,16 +9,16 @@ const Footer = (): JSX.Element => {
 
   return (
     <footer className='footer'>
-      {/* <h4>Technical interview (React)</h4>
+      <h4>Technical interview (React)</h4>
       <span>@nachop51</span>
-      <h5>Shopping Cart using useContext & useReducer</h5> */}
+      <h5>Shopping Cart using useContext & useReducer</h5>
       {/* {
         JSON.stringify(filters, null, 2)
       }
       <br /> */}
-      {
+      {/* {
         JSON.stringify(cart, null, 2)
-      }
+      } */}
     </footer>
   )
 }

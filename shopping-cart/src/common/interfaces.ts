@@ -16,10 +16,13 @@ export interface IProducts {
 export interface IFilters {
   filters: {
     category: string
-    minPrice: number
+    minPrice: number | string
   }
-  filterProducts: (products: IProducts[]) => IProducts[]
-  setFilters: (filters: { category: string, minPrice: number }) => void
+  filterProducts?: (products: IProducts[]) => IProducts[]
+  setFilters: React.Dispatch<React.SetStateAction<{
+    category: string
+    minPrice: number
+  }>>
 }
 
 export interface ICartContext {
