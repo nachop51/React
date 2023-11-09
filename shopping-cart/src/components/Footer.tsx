@@ -1,11 +1,11 @@
 import React from 'react'
 import './Footer.css'
-import useFilters from '../hooks/useFilters'
-import { useCart } from '../hooks/useCart'
+// import useFilters from '../hooks/useFilters'
+// import { useCart } from '../hooks/useCart'
 
 const Footer = (): JSX.Element => {
-  const { filters } = useFilters()
-  const { cart } = useCart()
+  // const { filters } = useFilters()
+  // const { cart } = useCart()
 
   return (
     <footer className='footer'>
