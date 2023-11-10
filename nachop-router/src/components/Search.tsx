@@ -1,6 +1,6 @@
-const SearchPage = ({ routeParams }: { routeParams: Record<string, string> }): JSX.Element => {
+const SearchPage = ({ routeParams }: { routeParams?: Record<string, string> }): JSX.Element => {
   return (
-    <h1>You have searched for: {routeParams.query}</h1>
+    <h1>You have searched for: {routeParams?.query}</h1>
   )
 }
 

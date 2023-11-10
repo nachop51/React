@@ -1,23 +1,24 @@
-import { Children, useEffect, useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 import { EVENTS } from './consts'
 import { match } from 'path-to-regexp'
+import { getCurrentPath } from './utils'
 
 interface RouterProps {
   children?: React.ReactNode
   routes?: Array<{
     path: string
-    Component: () => JSX.Element
+    Component: ({ routeParams }: { routeParams?: Record<string, string> }) => JSX.Element
   }>
   defaultComponent?: () => JSX.Element
   routeParams?: Record<string, string>
 }
 
 export default function Router ({ children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1> }: RouterProps): JSX.Element {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const [currentPath, setCurrentPath] = useState(getCurrentPath())
 
   useEffect(() => {
     const onLocationChange = (): void => {
-      setCurrentPath(window.location.pathname)
+      setCurrentPath(getCurrentPath())
     }
 
     window.addEventListener(EVENTS.PUSHSTATE, onLocationChange)
@@ -38,12 +39,14 @@ export default function Router ({ children, routes = [], defaultComponent: Defau
     Component: () => JSX.Element
   } | null
 
-  const routesFromChildren: Route = Children.map(children, ({ props, type }) => {
+  const routesFromChildren = Children.map<React.ReactNode, { props: object, type: { name: string } }>(children, ({ props, type }) => {
     const { name } = type
     const isRoute = name === 'Route'
 
     return isRoute ? props : null
   })?.filter(Boolean)
+
+  console.log(routesFromChildren)
 
   const routesToUse = routes.concat(routesFromChildren ?? [])
 
@@ -52,11 +55,11 @@ export default function Router ({ children, routes = [], defaultComponent: Defau
 
     const matcherUrl = match(path, { decode: decodeURIComponent })
     const matched = matcherUrl(currentPath)
-    if (!matched) return false
+    if (matched === false) return false
 
     routeParams = matched.params
     return true
   })?.Component ?? DefaultComponent
 
-  return <Page routeParams={routeParams} />
+  return Page !== undefined ? <Page routeParams={routeParams} /> : <DefaultComponent />
 }
