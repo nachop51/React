@@ -4,8 +4,6 @@ interface RouteProps {
   routeParams?: Record<string, string>
 }
 
-const Route = ({ path, Component }: RouteProps): null => {
+export const Route = ({ path, Component }: RouteProps): null => {
   return null
 }
-
-export default Route

@@ -1,7 +1,7 @@
 import React, { Children, useEffect, useState } from 'react'
-import { EVENTS } from './consts'
+import { EVENTS } from '../utils/consts'
 import { match } from 'path-to-regexp'
-import { getCurrentPath } from './utils'
+import { getCurrentPath } from '../utils/getCurrentPath'
 
 interface RouterProps {
   children?: React.ReactNode
@@ -13,7 +13,7 @@ interface RouterProps {
   routeParams?: Record<string, string>
 }
 
-export default function Router ({ children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1> }: RouterProps): JSX.Element {
+export function Router ({ children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1> }: RouterProps): JSX.Element {
   const [currentPath, setCurrentPath] = useState(getCurrentPath())
 
   useEffect(() => {
@@ -33,11 +33,6 @@ export default function Router ({ children, routes = [], defaultComponent: Defau
   })
 
   let routeParams = {}
-
-  type Route = {
-    path: string
-    Component: () => JSX.Element
-  } | null
 
   const routesFromChildren = Children.map<React.ReactNode, { props: object, type: { name: string } }>(children, ({ props, type }) => {
     const { name } = type

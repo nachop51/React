@@ -1,12 +1,12 @@
 import { Suspense, lazy } from 'react'
 
-import HomePage from './components/Home'
+import HomePage from './pages/Home'
 // import AboutPage from './components/About' // static import
-import Router from './Router'
-import Route from './Route'
-import SearchPage from './components/Search'
+import { Router } from './components/Router'
+import { Route } from './components/Route'
+import SearchPage from './pages/Search'
 
-const AboutPage = lazy(async () => await import('./components/About')) // dynamic import
+const AboutPage = lazy(async () => await import('./pages/About')) // dynamic import
 
 const appRoutes = [
   // {

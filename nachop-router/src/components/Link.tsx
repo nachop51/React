@@ -1,5 +1,5 @@
 import React from 'react'
-import { EVENTS } from './consts'
+import { EVENTS } from '../utils/consts'
 
 export function navigate (href: string): void {
   window.history.pushState({}, '', href)
