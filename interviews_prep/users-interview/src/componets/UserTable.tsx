@@ -1,14 +1,22 @@
-import { type User } from '../types'
+import { SortBy } from '../types.d'
+import type { User } from '../types.d'
 
-const UserTable = ({ users, colored }: { users: User[], colored: boolean }) => {
+interface Props {
+  users: User[]
+  colored: boolean
+  deleteUser: (email: string) => void
+  changeSorting: (sort: SortBy) => void
+}
+
+const UserTable = ({ users, colored, deleteUser, changeSorting }: Props) => {
   return (
     <table width='100%'>
       <thead>
         <tr>
           <th>Photo</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Contry</th>
+          <th style={{ cursor: 'crosshair' }} onClick={() => { changeSorting(SortBy.NAME) }}>First Name</th>
+          <th style={{ cursor: 'crosshair' }} onClick={() => { changeSorting(SortBy.LAST) }}>Last Name</th>
+          <th style={{ cursor: 'crosshair' }} onClick={() => { changeSorting(SortBy.COUNTRY) }}>Contry</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -19,7 +27,7 @@ const UserTable = ({ users, colored }: { users: User[], colored: boolean }) => {
             const color = colored ? bgColor : 'transparent'
 
             return (
-              <tr key={index} style={{ background: color }}>
+              <tr key={user.email} style={{ background: color }}>
                 <td>
                   <img src={user.picture.thumbnail} alt={user.name.first} />
                 </td>
@@ -28,7 +36,7 @@ const UserTable = ({ users, colored }: { users: User[], colored: boolean }) => {
                 <td>{user.location.country}</td>
                 <td>
                   <button>Edit</button>
-                  <button>Delete</button>
+                  <button onClick={() => { deleteUser(user.email) }}>Delete</button>
                 </td>
               </tr>
             )
