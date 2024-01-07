@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import SearchBar from './componets/SearchBar'
 import ImageList from './componets/ImageList'
 import useImages from './hooks/useImages'
