@@ -1,0 +1,42 @@
+.searchbar {
+  width: 100%;
+  display: flex;
+}
+
+.searchbar-form {
+  display: flex;
+  justify-content: center;
+  margin: 1.2rem auto;
+  width: 60%;
+
+  transition: width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.searchbar-form input,
+.searchbar-form button {
+  border: none;
+}
+
+.searchbar-form input {
+  flex: 5;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  padding: 0.7rem;
+  /* arriba izq, arriba der, abajo der, abajo izq */
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.searchbar-form input:focus {
+  outline: none;
+}
+
+.searchbar-form:focus-within {
+  width: 80%;
+}
+
+.searchbar-form button {
+  flex: 1;
+  padding: 0 0.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  cursor: pointer;
+}
