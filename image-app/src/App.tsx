@@ -1,19 +1,17 @@
-import { useEffect } from 'react'
+import { LoadingIcon } from './componets/Icons'
 import SearchBar from './componets/SearchBar'
 import ImageList from './componets/ImageList'
 import useImages from './hooks/useImages'
-import { LoadingIcon } from './componets/Icons'
+import useSEO from './hooks/useSEO'
 
 interface AppProps {
   title: string
+  description?: string
 }
 
-const App: React.FC<AppProps> = ({ title }) => {
+const App: React.FC<AppProps> = ({ title, description }) => {
   const { images, searchImages, loading } = useImages()
-
-  useEffect(() => {
-    document.title = title
-  }, [])
+  useSEO({ title, description })
 
   return (
     <main>

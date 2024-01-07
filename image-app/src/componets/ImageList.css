@@ -1,7 +1,6 @@
 .image-list {
-  max-width: 70vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(auto, 300px));
   gap: 1.5rem;
 }
 
@@ -11,10 +10,9 @@
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1000px) {
   .image-list {
-    grid-template-columns: 1fr 1fr 1fr;
-    max-width: 150vh;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

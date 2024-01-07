@@ -11,6 +11,6 @@ if (root == null) {
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <App title='Images searcher' />
+    <App title='Images searcher' description='Search for images' />
   </React.StrictMode>
 )
