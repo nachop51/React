@@ -1,27 +1,13 @@
-import { redirect } from 'next/navigation'
-import { db } from '@/db'
+'use client'
+
+import { useFormState } from 'react-dom'
+import * as actions from '@/actions'
 
 const CreateSnippet = () => {
-  async function createSnippet (formData: FormData) {
-    'use server'
-
-    const title = formData.get('title') as string
-    const code = formData.get('code') as string
-
-    const snippet = await db.snippet.create({
-      data: {
-        title,
-        code
-      }
-    })
-
-    console.log(snippet)
-
-    redirect('/')
-  }
+  const [formState, action] = useFormState(actions.createSnippet, { message: '' })
 
   return (
-    <form action={createSnippet}>
+    <form action={action}>
       <h3 className='font-bold m-3'>
         Create a new snippet
       </h3>
@@ -39,6 +25,12 @@ const CreateSnippet = () => {
           </label>
           <textarea name='code' id='code' className='border rounded p-2 w-full' />
         </div>
+
+        {formState.message && (
+          <div className='text-red-500'>
+            {formState.message}
+          </div>
+        )}
 
         <button type='submit' className='rounded p-2 bg-blue-200'>
           Create

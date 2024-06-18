@@ -2,7 +2,12 @@ import Link from 'next/link'
 import { db } from '@/db'
 
 export default async function Home () {
-  const snippets = await db.snippet.findMany()
+  const snippets = await db.snippet.findMany({
+    select: {
+      id: true,
+      title: true
+    }
+  })
 
   const renderedSnippets = snippets.map(snippet => (
     <Link key={snippet.id} className='border rounded p-2 m-2' href={`/snippets/${snippet.id}`}>
